@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Bootstrap Select Ajax</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .exp-right-menu{ width: 230.5px; top: 20px; }
+    .example {
+        position: relative;
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
+    }
+    .example .source{
+        padding: 45px 15px 15px;
+    }
+    .example:after {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #959595;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        content: "Example";
+    }
+    .example pre{
+        background-color: #f7f7f9;
+        border: 0 none;
+        border-top: 1px solid #e5e5e5;
+        border-radius: 0;
+        margin: 0;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header"><h1>Bootstrap Select Ajax <small>bootstrap-select-ajax.js</small></h1></div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p>Bootstrap select ajax is <a href="https://silviomoreto.github.io/bootstrap-select/examples/">bootstrap-select</a> addons to make it support ajax filter options. As <code>bootstrap-select</code> doesn't support ajax content by default.</p>
+                        
+                        <section>
+                            <h2 id="sec-example">Example</h2>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/">
+    <option value="AL">Albania</option>
+    <option value="DE">Germany</option>
+    <option value="CH">Switzerland</option>
+    <option value="AF">Afghanistan</option>
+</select>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                                
+                            </div>
+                        </section>
+                        
+                        <section>
+                            <h2 id="sec-ajax-response">Ajax Response</h2>
+                            
+                            <p>There're two formats of response bootstrap-select-ajax understand, with and without optgroup. If for some reason the server can't make it, please provide <code>ajaxPreProcess</code> option to format the response.</p>
+                            
+                            <h3>With Optgroups</h3>
+                            
+                            <p>The option with optgroup should response with multilevel key-value pair of array where key of the first level is the group name, and the key of the second level array is <code>option</code> value and the value of the array is the <code>option</code> element label.</p>
+                            
+                            <pre class="manual-pre"><code class="json">{
+    "Europe": {
+        "AD": "Andorra",
+        "AL": "Albania"
+    },
+    "Asia": {
+        "AE": "United Arab Emirates",
+        "AF": "Afghanistan",
+        "AM": "Armenia"
+    },
+    "North America": {
+        "AG": "Antigua and Barbuda",
+        "AI": "Anguilla"
+    },
+    "Africa": {
+        "AO": "Angola"
+    },
+    "Antarctica": {
+        "AQ": "Antarctica"
+    },
+    "South America": {
+        "AR": "Argentina"
+    }
+}</code></pre>
+
+                            <h3>Without Optgroups</h3>
+                            
+                            <p>Response without optgroup is simpler as the response is single level array where the array key is the <code>option</code> value and the array value is the <code>option</code> label.</p>
+                            
+                            <pre class="manual-pre"><code class="json">{
+    "AD": "Andorra",
+    "AE": "United Arab Emirates",
+    "AF": "Afghanistan",
+    "AG": "Antigua and Barbuda",
+    "AI": "Anguilla",
+    "AL": "Albania",
+    "AM": "Armenia",
+    "AO": "Angola",
+    "AQ": "Antarctica",
+    "AR": "Argentina"
+}</code></pre>
+                            
+                        </section>
+                        
+                        <section>
+                            <h2 id="sec-option">Options</h2>
+                            
+                            <p>List of options bootstrap-select-ajax.</p>
+                            
+                            <table class="table">
+                                <thead>
+                                    <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ajaxCallback</td>
+                                        <td>Function</td>
+                                        <td><code>function</code></td>
+                                        <td>Custom function that do ajax request. This function get called with the following arguments:<br>
+                                        <ul>
+                                            <li>qValue <code>String</code> The search query value.</li>
+                                            <li>callback <code>Function</code> The callback to call when ajax request done. The function expected to be called with single argument the ajax result.</li>
+                                            <li>select <code>Node</code> The related select element.</li>
+                                            <li>url <code>String</code> Provided ajax URL target.</li>
+                                            <li>qName <code>String</code> Provided search query string name.</li>
+                                        </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ajaxDelay</td>
+                                        <td>Integer</td>
+                                        <td><code>300</code></td>
+                                        <td>Delay time before executing ajax request.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ajaxPreProcess</td>
+                                        <td>Function</td>
+                                        <td><code>function</code></td>
+                                        <td>Preprocessor the ajax response before send it to renderer. The function get called with single argument which is the ajax response.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ajaxQName</td>
+                                        <td>String</td>
+                                        <td><code>q</code></td>
+                                        <td>The url query name for search query to append to ajax URL.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        
+                        <section>
+                            <h2 id="sec-usage">Usage</h2>
+                            
+                            <p>The bootstrap-select-ajax try to find options from server when user typing on select search box. It identify the element by data attribute <code>data-ajax</code> on every bootstrap-select element or via JavaScript.</p>
+                            
+                            <h3>Via data attributes</h3>
+                            
+                            <p>Activate ajax search without writing JavaScript. Add attribute <code>data-ajax</code> on bootstrap-select element with attribute value URL where to get the content</p>
+                            
+                            <pre class="manual-pre"><code class="html">&lt;select class="selectpicker" data-ajax="/some/url/to/fetch/data"&gt;&lt;/select&gt;</code></pre>
+                            
+                            <h3>Via JavaScript</h3>
+                            
+                            <p>Identify bootstrap-select-ajax by calling <code>selectpickerAjax</code> to the bootstrap-select element with options.</p>
+                            
+                            <pre class="manual-pre"><code class="js">$('.selectpicker').selectpickerAjax('/some/url/to/fetch/data')</code></pre>
+                        </section>
+                        
+                        <section>
+                            <h2 id="sec-examples">More Examples</h2>
+                            
+                            <h3>Call Via JavaScript</h3>
+                            
+                            <p>Add ajax search feature to exists bootstrap-select element by calling <code>selectpickerAjax</code> from the element with <code>ajax</code> option.</p>
+                            
+                            <!-- EXAMPLE 1 -->
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" id="example-1">
+    <option value="AL">Albania</option>
+    <option value="DE">Germany</option>
+    <option value="CH">Switzerland</option>
+    <option value="AF">Afghanistan</option>
+</select>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    $('#example-1').selectpickerAjax('http://php-iqbalfn.rhcloud.com/bsa/');
+});
+</script>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 1 END -->
+                            
+                            <!-- EXAMPLE 2 -->
+                            
+                            <h3>Custom Ajax Callback</h3>
+                            
+                            <p>Add <code>ajaxCallback</code> option to override bootstrap-select-ajax ajax function.</p>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" id="example-2"></select>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    $('#example-2').selectpickerAjax({
+        ajax: 'http://php-iqbalfn.rhcloud.com/bsa/',
+        ajaxCallback: function(q, cb){
+            $.get('http://php-iqbalfn.rhcloud.com/bsa/', {q: q}, function(res){
+                console.log('ajax done');
+                cb(res);
+            });
+        }
+    });
+});
+</script>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 2 END -->
+                            
+                            <!-- EXAMPLE 3 -->
+                            
+                            <h3>Custom Preprocessor</h3>
+                            
+                            <p>If you need to do something with ajax response data, add option <code>ajaxPreProcess</code> with callback function to call after getting ajax response.</p>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" id="example-3"></select>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    $('#example-3').selectpickerAjax({
+        ajax: 'http://php-iqbalfn.rhcloud.com/bsa/',
+        ajaxPreProcess: function(res, cb){
+            console.log('process the response');
+            return res;
+        }
+    });
+});
+</script>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 3 END -->
+                            
+                            <!-- EXAMPLE 4 -->
+                            
+                            <h3>With Optgroups</h3>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/?groupped=1">
+    <optgroup label="Europe">
+        <option value="AL">Albania</option>
+    </optgroup>
+</select>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 4 END -->
+                            
+                            <!-- EXAMPLE 5 -->
+                            
+                            <h3>Preset Value</h3>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/?groupped=1">
+    <optgroup label="Asia">
+        <option value="AE">United Arab Emirates</option>
+    </optgroup>
+    <optgroup label="Europe">
+        <option value="AD">Andorra</option>
+        <option value="AL" selected="selected">Albania</option>
+    </optgroup>
+</select>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 5 END -->
+                            
+                            <!-- EXAMPLE 6 -->
+                            
+                            <h3>Multiple Values</h3>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" multiple data-ajax="http://php-iqbalfn.rhcloud.com/bsa/">
+    <option value="AE">United Arab Emirates</option>
+    <option value="AD">Andorra</option>
+    <option value="AL">Albania</option>
+</select>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 6 END -->
+                            
+                        </section>
+                        
+                        
+                    </div>
+                    <div class="col-md-3">
+                        <div class="list-group exp-right-menu" data-spy="affix" data-offset-top="100">
+                            <a href="#sec-example" class="list-group-item">Example</a>
+                            <a href="#sec-ajax-response" class="list-group-item">Ajax Response</a>
+                            <a href="#sec-option" class="list-group-item">Options</a>
+                            <a href="#sec-usage" class="list-group-item">Usage</a>
+                            <a href="#sec-examples" class="list-group-item">More Examples</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="height:50px"></div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $('.auto-pre').each(function(i,pre){
+        pre = $(pre);
+        var parent = pre.parent();
+        var source = parent.children('.source').html().trim();
+        pre.children('code').html(source.replace(/>/g,'&gt;').replace(/</g,'&lt;'));
+        hljs.highlightBlock(pre.children('code').get(0));
+    });
+    $('.manual-pre').each(function(i,code){
+        hljs.highlightBlock(code);
+    });
+    $.get('http://php-iqbalfn.rhcloud.com/bsa/'); // make sure to turn the server on
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="src/bootstrap-select-ajax.js"></script>
+</body>
+</html>

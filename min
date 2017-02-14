@@ -1,0 +1,2 @@
+#!/bin/bash
+uglifyjs src/bootstrap-select-ajax.js > dist/bootstrap-select-ajax.min.js
