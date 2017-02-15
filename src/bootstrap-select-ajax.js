@@ -25,10 +25,11 @@
             
             for(var i=0; i<options.length; i++){
                 var option = options[i];
-                if(option.selected)
+                var $option = $(option);
+                
+                if(option.selected || $option.hasClass('bs-title-option'))
                     continue;
                 
-                var $option = $(option);
                 var parent = $option.parent();
                 $option.remove();
                 
