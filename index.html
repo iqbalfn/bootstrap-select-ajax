@@ -58,7 +58,7 @@
                             
                             <div class="example">
                                 <div class="source">
-<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/">
+<select class="selectpicker" data-ajax="server/">
     <option value="AL">Albania</option>
     <option value="DE">Germany</option>
     <option value="CH">Switzerland</option>
@@ -135,6 +135,18 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>ajax</td>
+                                        <td>String</td>
+                                        <td><code>NULL</code></td>
+                                        <td>Ajax target URL.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>data</td>
+                                        <td>Object</td>
+                                        <td><code>{}</code></td>
+                                        <td>Additional query string for the request.</td>
+                                    </tr>
+                                    <tr>
                                         <td>ajaxCallback</td>
                                         <td>Function</td>
                                         <td><code>function</code></td>
@@ -207,7 +219,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-    $('#example-1').selectpickerAjax('http://php-iqbalfn.rhcloud.com/bsa/');
+    $('#example-1').selectpickerAjax('server/');
 });
 </script>
                                 </div>
@@ -230,9 +242,9 @@ document.addEventListener('DOMContentLoaded', function(){
 <script>
 document.addEventListener('DOMContentLoaded', function(){
     $('#example-2').selectpickerAjax({
-        ajax: 'http://php-iqbalfn.rhcloud.com/bsa/',
+        ajax: 'server/',
         ajaxCallback: function(q, cb){
-            $.get('http://php-iqbalfn.rhcloud.com/bsa/', {q: q}, function(res){
+            $.get('server/', {q: q}, function(res){
                 console.log('ajax done');
                 cb(res);
             });
@@ -260,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <script>
 document.addEventListener('DOMContentLoaded', function(){
     $('#example-3').selectpickerAjax({
-        ajax: 'http://php-iqbalfn.rhcloud.com/bsa/',
+        ajax: 'server/',
         ajaxPreProcess: function(res, cb){
             console.log('process the response');
             return res;
@@ -281,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             
                             <div class="example">
                                 <div class="source">
-<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/?groupped=1">
+<select class="selectpicker" data-ajax="server/?grouped=1">
     <optgroup label="Europe">
         <option value="AL">Albania</option>
     </optgroup>
@@ -299,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             
                             <div class="example">
                                 <div class="source">
-<select class="selectpicker" data-ajax="http://php-iqbalfn.rhcloud.com/bsa/?groupped=1">
+<select class="selectpicker" data-ajax="server/?grouped=1">
     <optgroup label="Asia">
         <option value="AE">United Arab Emirates</option>
     </optgroup>
@@ -321,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             
                             <div class="example">
                                 <div class="source">
-<select class="selectpicker" multiple data-ajax="http://php-iqbalfn.rhcloud.com/bsa/">
+<select class="selectpicker" multiple data-ajax="server/">
     <option value="AE">United Arab Emirates</option>
     <option value="AD">Andorra</option>
     <option value="AL">Albania</option>
@@ -332,6 +344,29 @@ document.addEventListener('DOMContentLoaded', function(){
                             </div>
                             
                             <!-- EXAMPLE 6 END -->
+
+                            <!-- EXAMPLE 7 -->
+                            
+                            <h3>Additional Query String</h3>
+                            
+                            <div class="example">
+                                <div class="source">
+<select class="selectpicker" id="example-7" title="Country"></select>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    $('#example-7').selectpickerAjax({
+        ajax: 'server/',
+        data: { benu: 'Asia' }
+    });
+});
+</script>
+                                </div>
+                                
+                                <pre class="auto-pre"><code class="html"></code></pre>
+                            </div>
+                            
+                            <!-- EXAMPLE 7 END -->
                             
                         </section>
                         
@@ -367,7 +402,6 @@ document.addEventListener('DOMContentLoaded', function(){
     $('.manual-pre').each(function(i,code){
         hljs.highlightBlock(code);
     });
-    $.get('http://php-iqbalfn.rhcloud.com/bsa/'); // make sure to turn the server on
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <script src="src/bootstrap-select-ajax.js"></script>
